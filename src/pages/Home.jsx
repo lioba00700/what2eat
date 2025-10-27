@@ -74,6 +74,9 @@ function Home() {
       duration: 0.5,
       ease: "power1.inOut",
     });
+    setTimeout(() => {
+      navigate("food");
+    }, 800);
   };
 
   return (
