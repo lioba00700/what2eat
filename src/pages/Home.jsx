@@ -10,20 +10,30 @@ import line from "../assets/decorations/line2.png";
 import dot from "../assets/decorations/dot-pattern.png";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
+  // 글자 하이라이터 div Ref
   const highlightboxRef = useRef();
+  // 데코용 음식 이미지 Ref
   const foodImgsRef = useRef([]);
+  // 화면 전환용 가림막 Ref
+  const transitionScreenRef = useRef({ left: null, right: null });
 
   useEffect(() => {
     if (!highlightboxRef.current || !foodImgsRef.current) return;
+    // 왼쪽에서 오른쪽으로 width 나타남
     gsap.fromTo(
       highlightboxRef.current,
       { scaleX: 0 },
       { scaleX: 1, transformOrigin: "left", duration: 0.4 }
     );
 
+    // 데코용 음식 이미지 배열
     const images = foodImgsRef.current;
+    // 순차적 애니메이션 효과 위해 타임라인 사용
     let tl = gsap.timeline();
     tl.fromTo(
       images[0],
@@ -50,8 +60,36 @@ function Home() {
     );
   }, [highlightboxRef, foodImgsRef]);
 
+  // 추천받으러가기 버튼 클릭 시 실행되는 함수
+  const onClickRecommend = () => {
+    if (!transitionScreenRef.current.left || !transitionScreenRef.current.right)
+      return;
+    gsap.to(transitionScreenRef.current.left, {
+      x: "100%",
+      duration: 0.5,
+      ease: "power1.inOut",
+    });
+    gsap.to(transitionScreenRef.current.right, {
+      x: "-100%",
+      duration: 0.5,
+      ease: "power1.inOut",
+    });
+  };
+
   return (
     <div className="select-none h-screen w-screen bg-light-yellow relative overflow-hidden">
+      <div
+        ref={(el) => {
+          if (el) transitionScreenRef.current.left = el;
+        }}
+        className="absolute w-[50%] top-0 -left-[50%] h-screen bg-point-yellow z-10"
+      ></div>
+      <div
+        ref={(el) => {
+          if (el) transitionScreenRef.current.right = el;
+        }}
+        className="absolute w-[50%] top-0 -right-[50%] h-screen bg-point-yellow z-10"
+      ></div>
       <div className="flex flex-col items-center pt-20">
         <FoodIcon />
         <div className="relative w-112.5 flex justify-center mb-7 mt-50">
@@ -67,7 +105,7 @@ function Home() {
           오늘 뭐 먹을지 고민되시나요?{"\n"}취향에 맞는 메뉴를 쉽고 빠르게
           추천해드립니다.
         </p>
-        <CustomButton style={"default"} onClick={() => {}}>
+        <CustomButton style={"default"} onClick={onClickRecommend}>
           추천받으러가기
         </CustomButton>
       </div>

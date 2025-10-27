@@ -15,11 +15,17 @@ const CustomButton = ({ children, style, onClick }) => {
 
   return (
     <button
-      onMouseEnter={(e)=>{
-        gsap.to(e.currentTarget, {y: -5, duration: 0.2})
+      onMouseEnter={(e) => {
+        gsap.to(e.currentTarget, {
+          y: -5,
+          duration: 0.2,
+        });
       }}
-      onMouseLeave={(e)=>{
-        gsap.to(e.currentTarget, {y: 0, duration: 0.2})
+      onMouseLeave={(e) => {
+        gsap.to(e.currentTarget, {
+          y: 0,
+          duration: 0.2,
+        });
       }}
       className={
         buttonStyle() +
