@@ -98,7 +98,7 @@ function Recommend() {
         ref={foodContainerRef}
         className="opacity-0 m-auto w-fit flex flex-col items-center"
       >
-        <div className="px-6 py-1 mb-4 bg-point-brown w-fit rounded-full text-white font-medium">
+        <div className="z-3 px-6 py-1 mb-4 bg-point-brown w-fit rounded-full text-white font-medium">
           {category}
         </div>
         <div className="relative flex justify-center mb-3">
