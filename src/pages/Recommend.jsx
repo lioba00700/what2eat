@@ -73,7 +73,7 @@ function Recommend() {
       })
       .to(backgroundRef.current, {
         backgroundColor: "#fff3d0",
-        duration: 0.1,
+        duration: 0,
         delay: 0.5,
       })
       .to(foodContainerRef.current, {
