@@ -149,7 +149,7 @@ function Home() {
         alt="데코용 치킨"
       />
       <img
-        className="absolute -left-30 top-0 min-w-460 z-1"
+        className="absolute -left-30 top-0  min-w-460 z-1"
         src={line}
         alt="데코용 곡선"
       />
