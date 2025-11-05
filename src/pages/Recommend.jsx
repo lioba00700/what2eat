@@ -2,20 +2,19 @@
 
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
-import burger from "../assets/icons/burger-line.svg";
-import pizza from "../assets/icons/pizza-line.svg";
-import fries from "../assets/icons/fries-line.svg";
+import useRandomFood from "../hooks/useRandomFood";
+import foodImg from "../assets/foods/image 20.png";
 
 function Recommend() {
+  const food = useRandomFood();
   // 공 애니메이션 용 Ref
   const ballRef = useRef();
   // 배경 애니메이션 용 Ref
   const backgroundRef = useRef();
-  // 음식 아이콘 Ref
-  const foodIconRef = useRef();
-  const [iconSrc, setIconSrc] = useState(burger);
+  // 추천 메뉴 컨테이너 Ref
+  const foodContainerRef = useRef();
   useEffect(() => {
-    if (!backgroundRef.current || !ballRef.current) return;
+    if (!backgroundRef.current || !ballRef.current || !foodContainerRef) return;
     let colorTl = gsap.timeline();
     colorTl
       .to(
@@ -78,7 +77,7 @@ function Recommend() {
       .fromTo(
         ballRef.current,
         { scaleX: 0.8, xPercent: -50, y: -600 },
-        { scaleX: 1, y: -130, duration: 1, ease: "power2.in" }
+        { scaleX: 1, y: 0, duration: 1, ease: "power2.in" }
       )
       .to(ballRef.current, {
         y: -300,
@@ -97,29 +96,18 @@ function Recommend() {
       })
       .to(backgroundRef.current, {
         backgroundColor: "#fff3d0",
-        duration: 0.2,
+        duration: 0.1,
         delay: 0.5,
+      })
+      .to(foodContainerRef.current, {
+        opacity: 1,
       });
 
     return () => {
       colorTl.kill();
       motionTl.kill();
     };
-  }, [backgroundRef, ballRef]);
-
-  useEffect(() => {
-    if (!iconSrc || !foodIconRef.current) return;
-    foodIconRef.current.style.opacity = 0;
-    gsap.to(foodIconRef.current, {});
-    const timer = setTimeout(() => {
-      if (iconSrc === burger) setIconSrc(pizza);
-      else if (iconSrc === pizza) setIconSrc(fries);
-    }, 1000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [iconSrc]);
-
+  }, [backgroundRef, ballRef, foodContainerRef]);
   return (
     <div
       ref={backgroundRef}
@@ -129,11 +117,11 @@ function Recommend() {
         ref={ballRef}
         className="absolute w-11 h-11 bg-light-yellow rounded-full left-1/2 top-1/2"
       ></div>
-      <div
-        ref={foodIconRef}
-        className="absolute left-1/2 top-[43%] -translate-x-1/2"
-      >
-        <img src={iconSrc} alt="음식 아이콘" />
+      <div ref={foodContainerRef} className="opacity-0">
+        <div>{food.category}</div>
+        <h1>{food.name}</h1>
+
+        <img src={foodImg} alt="" />
       </div>
     </div>
   );
