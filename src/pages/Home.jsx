@@ -93,31 +93,33 @@ function Home() {
         }}
         className="absolute w-[50%] top-0 -right-[50%] h-screen bg-point-yellow z-10"
       ></div>
-      <div className="flex flex-col items-center pt-20">
+      <div className="flex flex-col h-full items-center pt-20">
         <FoodIcon />
-        <div className="relative w-112.5 flex justify-center mb-7 mt-50">
-          <h1 className="w-fit text-[80px] font-black text-point-brown z-4">
-            랜덤메뉴추천
-          </h1>
-          <div
-            ref={highlightboxRef}
-            className="absolute bottom-2 bg-point-yellow/80 w-112.5 h-14.5 z-3"
-          ></div>
+        <div className="my-auto z-7 flex flex-col items-center pb-20">
+          <div className="relative w-112.5 h-fit flex justify-center">
+            <h1 className="w-fit text-[5rem] font-black text-point-brown z-4">
+              랜덤메뉴추천
+            </h1>
+            <div
+              ref={highlightboxRef}
+              className="absolute bottom-2 bg-point-yellow/80 w-112.5 h-14.5 z-3"
+            ></div>
+          </div>
+          <p className="whitespace-pre-line font-light text-lg/6 text-center mb-18 z-6">
+            오늘 뭐 먹을지 고민되시나요?{"\n"}취향에 맞는 메뉴를 쉽고 빠르게
+            추천해드립니다.
+          </p>
+          <CustomButton style={"default"} onClick={onClickRecommend}>
+            추천받으러가기
+          </CustomButton>
         </div>
-        <p className="whitespace-pre-line font-light text-lg/6 text-center mb-18 z-2">
-          오늘 뭐 먹을지 고민되시나요?{"\n"}취향에 맞는 메뉴를 쉽고 빠르게
-          추천해드립니다.
-        </p>
-        <CustomButton style={"default"} onClick={onClickRecommend}>
-          추천받으러가기
-        </CustomButton>
       </div>
       <img
         ref={(el) => {
           if (el && !foodImgsRef.current.includes(el))
             foodImgsRef.current.push(el);
         }}
-        className="absolute max-w-[43%] min-w-fit w-full h-fit -left-41.25 -top-10 z-2"
+        className="absolute max-w-[43%] min-w-fit w-full h-fit max-xl:max-h-fit max-xl:h-[36vw] max-md:min-h-80  object-contain  -left-41.25 -top-10 z-2"
         src={pizza1}
         alt="데코용 피자1"
       />
@@ -126,7 +128,7 @@ function Home() {
           if (el && !foodImgsRef.current.includes(el))
             foodImgsRef.current.push(el);
         }}
-        className="absolute max-w-[43%] min-w-fit w-full h-fit -right-41.25 bottom-30  z-3"
+        className="absolute max-w-[43%] min-w-fit w-full h-fit max-xl:max-h-fit max-xl:h-[36vw] max-md:min-h-80 object-contain  -right-41.25 bottom-30  z-3"
         src={pizza2}
         alt="데코용 피자2"
       />
@@ -135,7 +137,7 @@ function Home() {
           if (el && !foodImgsRef.current.includes(el))
             foodImgsRef.current.push(el);
         }}
-        className="absolute max-w-[40%] min-w-fit w-full h-fit -left-30 -bottom-40  z-2"
+        className="absolute max-w-[40%] min-w-fit w-full h-fit max-xl:max-h-fit max-xl:h-[42vw] max-md:min-h-90 object-contain  -left-30 -bottom-40  z-2"
         src={tteokbokki}
         alt="데코용 떡볶이"
       />
@@ -144,7 +146,7 @@ function Home() {
           if (el && !foodImgsRef.current.includes(el))
             foodImgsRef.current.push(el);
         }}
-        className="absolute max-w-[50%] min-w-fit w-full h-fit -right-60 top-5 z-2"
+        className="absolute max-w-[50%] min-w-fit w-full h-fit max-xl:max-h-fit max-md:min-h-90 max-xl:h-[42vw] max-md: object-contain -right-60 top-5 z-2"
         src={chicken}
         alt="데코용 치킨"
       />
